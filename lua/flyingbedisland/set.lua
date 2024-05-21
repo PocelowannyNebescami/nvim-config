@@ -34,10 +34,6 @@ vim.g.mapleader = " "
 
 vim.o.splitright = true
 
-vim.cmd([[
-    autocmd BufWritePre * %s/\s\+$//e
-]])
-
 local signs = {
     Error = '!',
     Warn = '?',
