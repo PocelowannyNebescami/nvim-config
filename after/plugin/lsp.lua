@@ -38,7 +38,7 @@ cmp.setup({
 lsp.set_sign_icons({
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
     local opts = {buffer = bufnr, remap = false}
 
     -- vim.keymap.set("n", "gD", function() vim.lsp.buf.definition() end, opts)
