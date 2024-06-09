@@ -9,3 +9,15 @@ autocmd('BufWritePre', {
         vim.fn.winrestview(view)
     end
 })
+
+autocmd("BufEnter", {
+    desc = "Disable autocommenting",
+
+    callback = function ()
+        vim.opt_local.formatoptions:remove({
+            'c', -- auto-wrap comments
+            'r', -- comment leader on <Enter>
+            'o', -- comment leader after `o` and `O`
+        })
+    end
+})
