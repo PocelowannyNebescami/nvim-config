@@ -12,11 +12,6 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
--- vim.opt.swapfile = false
--- vim.opt.backup = false
--- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
--- vim.opt.undofile = true
-
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
@@ -34,14 +29,8 @@ vim.g.mapleader = " "
 
 vim.o.splitright = true
 
-local signs = {
-    Error = '!',
-    Warn = '?',
-    Info = '🤓',
-    Hint = '🤔',
-}
 vim.diagnostic.config({
     virtual_text = {
-        prefix = signs.Info
+        prefix = '🤓',
     }
 })
