@@ -19,7 +19,11 @@ lsp.setup_servers({
     'clangd',
     'marksman',
 })
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.clangd.setup({
+    cmd = { "clangd", "--header-insertion=never" },
+})
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
