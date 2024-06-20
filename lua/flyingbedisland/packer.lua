@@ -16,7 +16,7 @@ return require('packer').startup(function(use)
         'coffebar/neovim-project',
         requires = {
             { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope.nvim" },
+            { "nvim-telescope/telescope.nvim", branch = '0.1.x' },
             { "Shatur/neovim-session-manager" },
         }
     }
