@@ -1,6 +1,5 @@
 # TODO neovim
 
-- in `v` mode show whitespace characters when selected
 - allow wrapping selected text in quotations
 - change combination to apply autocompletion from `<C-y>`
 - config going through references via telescope
