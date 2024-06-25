@@ -46,4 +46,6 @@ return require('packer').startup(function(use)
 
     use { 'mcauley-penney/visual-whitespace.nvim', config = true }
 
+    use { 'kylechui/nvim-surround', tag = "*" }
+
 end)
