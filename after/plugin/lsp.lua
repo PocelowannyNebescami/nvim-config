@@ -5,7 +5,6 @@ lsp.preset("recommended")
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed =  {
-        'tsserver',
         'lua_ls',
         'clangd',
         'gopls',
@@ -14,7 +13,6 @@ require('mason-lspconfig').setup({
 })
 
 lsp.setup_servers({
-    'tsserver',
     'gopls',
     'clangd',
     'marksman',
