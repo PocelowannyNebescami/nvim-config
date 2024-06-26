@@ -14,7 +14,6 @@ require('mason-lspconfig').setup({
 
 lsp.setup_servers({
     'gopls',
-    'clangd',
     'marksman',
 })
 local lspconfig = require('lspconfig')
