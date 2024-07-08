@@ -43,19 +43,34 @@ lsp.set_sign_icons({
 })
 
 lsp.on_attach(function(_, bufnr)
-    local opts = {buffer = bufnr, remap = false}
+    local opts = function(description)
+        if description == nil  or description == nil then
+            return { buffer = bufnr, remap = false }
+        end
+        return { buffer = bufnr, remap = false, desc = description }
+    end
 
-    vim.keymap.set("n", "gD", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vc", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.definition,
+            opts("[G]o to [d]efinition"))
+    vim.keymap.set("n", "gd", vim.lsp.buf.declaration,
+            opts("[G]o to [d]eclaration"))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
+            opts("[V]iew [w]orkspace [s]ymbol"))
+    vim.keymap.set("n", "<leader>vc", vim.diagnostic.open_float,
+            opts("[V]iew diagnosti[c] messages"))
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
+            opts("Go to next [d]iagnostic message"))
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
+            opts("Go to previous [d]iagnostic message"))
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
+            opts("[V]iew [c]ode [a]ctions"))
+    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,
+            opts("[V]iew [r]efe[r]ences"))
+    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename,
+            opts("[R]e[n]ame symbol"))
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
+            opts("Signature [h]elp"))
 end)
 
 lsp.setup()
