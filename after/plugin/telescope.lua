@@ -10,3 +10,6 @@ end, { desc = "Find files in [p]roject respecting git"})
 vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end, { desc = "Find files in [p]roject with [s]tring" })
+vim.keymap.set('n', '<leader>rs', builtin.lsp_references, {
+	desc = "[R]eferences to [s]ymbol"
+})
