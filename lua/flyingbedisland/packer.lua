@@ -41,4 +41,6 @@ return require('packer').startup(function(use)
 
     use { 'kylechui/nvim-surround', tag = "*" }
 
+    use 'm4xshen/autoclose.nvim'
+
 end)
