@@ -28,6 +28,7 @@ local cmp_action = lsp.cmp_action()
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'luasnip' },
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
