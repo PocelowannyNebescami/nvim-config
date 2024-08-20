@@ -50,9 +50,9 @@ lsp.on_attach(function(_, bufnr)
         return { buffer = bufnr, remap = false, desc = description }
     end
 
-    vim.keymap.set("n", "gD", vim.lsp.buf.definition,
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition,
             opts("[G]o to [d]efinition"))
-    vim.keymap.set("n", "gd", vim.lsp.buf.declaration,
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
             opts("[G]o to [d]eclaration"))
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
