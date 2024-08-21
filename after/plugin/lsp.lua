@@ -1,25 +1,11 @@
-local lsp = require('lsp-zero')
-
-lsp.preset("recommended")
+local lsp = require('lsp-zero').preset({
+    name = "recommended",
+    sign_icons = false,
+})
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed =  {
-        'lua_ls',
-        'clangd',
-        'gopls',
-        'marksman',
-    }
-})
-
-lsp.setup_servers({
-    'gopls',
-    'marksman',
-})
-local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.clangd.setup({
-    cmd = { "clangd", "--header-insertion=never" },
+    ensure_installed =  { 'lua_ls', 'marksman', }
 })
 
 local cmp = require('cmp')
@@ -40,7 +26,15 @@ cmp.setup({
     }),
 })
 
-lsp.set_sign_icons({
+local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.clangd.setup({
+    cmd = { "clangd", "--header-insertion=never" },
+})
+lspconfig.gopls.setup({})
+lspconfig.marksman.setup({
+    capabilities = cmp_capabilities
 })
 
 lsp.on_attach(function(_, bufnr)
