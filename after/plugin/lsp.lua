@@ -10,20 +10,34 @@ require('mason-lspconfig').setup({
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_action = lsp.cmp_action()
+local lsnip = require("luasnip")
 cmp.setup({
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
     },
-    mapping = cmp.mapping.preset.insert({
+    mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
         ['<Tab>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
-    }),
+        -- jump to the next param in a snippet
+        ['<C-f>'] = cmp.mapping(function(fallback)
+            if lsnip.locally_jumpable(1) then
+                lsnip.jump(1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        -- jump to the previous param in a snippet
+        ['<C-b>'] = cmp.mapping(function(fallback)
+            if lsnip.locally_jumpable(-1) then
+                lsnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    },
 })
 
 local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
