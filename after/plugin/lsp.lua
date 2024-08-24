@@ -1,8 +1,3 @@
-local lsp = require('lsp-zero').preset({
-    name = "recommended",
-    sign_icons = false,
-})
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed =  { 'lua_ls', 'marksman', }
@@ -40,46 +35,68 @@ cmp.setup({
     },
 })
 
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.clangd.setup({
-    cmd = { "clangd", "--header-insertion=never" },
+
+lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
+    'force',
+    lspconfig.util.default_config.capabilities,
+    require("cmp_nvim_lsp").default_capabilities()
+)
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+lspconfig.lua_ls.setup({
+    settings = {
+        Lua = {
+            telemetry = { enable = false },
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path,
+            },
+            diagnostic = { globals = { "vim" } },
+            workspace = {
+                checkThirdParty = false,
+                library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" }
+            },
+        }
+    }
 })
+lspconfig.clangd.setup({ cmd = { "clangd", "--header-insertion=never" } })
 lspconfig.gopls.setup({})
-lspconfig.marksman.setup({
-    capabilities = cmp_capabilities
-})
+lspconfig.marksman.setup({})
 
-lsp.on_attach(function(_, bufnr)
-    local opts = function(description)
-        if description == nil  or description == nil then
-            return { buffer = bufnr, remap = false }
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
+    callback = function(event)
+        local opts = function(description)
+            if description == nil  or description == nil then
+                return { buffer = event.buf, remap = false }
+            end
+            return { buffer = event.buf, remap = false, desc = description }
         end
-        return { buffer = bufnr, remap = false, desc = description }
+
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition,
+                opts("[G]o to [d]efinition"))
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
+                opts("[G]o to [d]eclaration"))
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
+        vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
+                opts("[V]iew [w]orkspace [s]ymbol"))
+        vim.keymap.set("n", "<leader>vc", vim.diagnostic.open_float,
+                opts("[V]iew diagnosti[c] messages"))
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
+                opts("Go to next [d]iagnostic message"))
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
+                opts("Go to previous [d]iagnostic message"))
+        vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
+                opts("[V]iew [c]ode [a]ctions"))
+        vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,
+                opts("[V]iew [r]efe[r]ences"))
+        vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename,
+                opts("[R]e[n]ame symbol"))
+        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
+                opts("Signature [h]elp"))
+
     end
-
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-            opts("[G]o to [d]efinition"))
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-            opts("[G]o to [d]eclaration"))
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
-    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
-            opts("[V]iew [w]orkspace [s]ymbol"))
-    vim.keymap.set("n", "<leader>vc", vim.diagnostic.open_float,
-            opts("[V]iew diagnosti[c] messages"))
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
-            opts("Go to next [d]iagnostic message"))
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
-            opts("Go to previous [d]iagnostic message"))
-    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
-            opts("[V]iew [c]ode [a]ctions"))
-    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,
-            opts("[V]iew [r]efe[r]ences"))
-    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename,
-            opts("[R]e[n]ame symbol"))
-    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
-            opts("Signature [h]elp"))
-end)
-
-lsp.setup()
+})

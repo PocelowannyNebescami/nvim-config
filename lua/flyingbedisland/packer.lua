@@ -18,18 +18,18 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context' }
 
+    use { 'williamboman/mason.nvim' }
     use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'neovim/nvim-lspconfig',
         requires = {
-            { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
-            { 'neovim/nvim-lspconfig' },
-            { 'hrsh7th/nvim-cmp' },
+        } }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'L3MON4D3/LuaSnip', tag = "v2.*" },
         }
-
     }
 
     use "lewis6991/gitsigns.nvim"
