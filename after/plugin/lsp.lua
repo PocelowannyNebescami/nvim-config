@@ -85,9 +85,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 opts("[V]iew [w]orkspace [s]ymbol"))
         vim.keymap.set("n", "<leader>vc", vim.diagnostic.open_float,
                 opts("[V]iew diagnosti[c] messages"))
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
                 opts("Go to next [d]iagnostic message"))
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
                 opts("Go to previous [d]iagnostic message"))
         vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
                 opts("[V]iew [c]ode [a]ctions"))
