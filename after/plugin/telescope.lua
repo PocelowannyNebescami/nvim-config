@@ -1,5 +1,16 @@
 local builtin = require('telescope.builtin')
 local utils = require('telescope.utils')
+local actions = require('telescope.actions')
+
+require("telescope").setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close
+            },
+        },
+    },
+})
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {
     desc = "Find [p]roject [f]iles"
