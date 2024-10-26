@@ -43,6 +43,7 @@ lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
     require("cmp_nvim_lsp").default_capabilities()
 )
 
+-- Lua
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -62,9 +63,23 @@ lspconfig.lua_ls.setup({
         }
     }
 })
-lspconfig.clangd.setup({ cmd = { "clangd", "--header-insertion=never" } })
-lspconfig.gopls.setup({})
+
+-- Markdown
 lspconfig.marksman.setup({})
+
+-- C++
+lspconfig.clangd.setup({ cmd = { "clangd", "--header-insertion=never" } })
+lspconfig.cmake.setup({})
+
+-- Golang
+lspconfig.gopls.setup({
+    filetypes = { 'go', 'gomod', 'gowork', 'gotmpl', 'templ' },
+})
+lspconfig.templ.setup({})
+lspconfig.htmx.setup({})
+
+-- Rust
+lspconfig.rust_analyzer.setup({})
 
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
