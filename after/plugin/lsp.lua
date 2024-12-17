@@ -68,7 +68,7 @@ lspconfig.lua_ls.setup({
 lspconfig.marksman.setup({})
 
 -- C++
-lspconfig.clangd.setup({ cmd = { "clangd", "--header-insertion=never" } })
+lspconfig.clangd.setup({})
 lspconfig.neocmake.setup({})
 
 -- Golang
