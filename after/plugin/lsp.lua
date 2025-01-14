@@ -1,6 +1,38 @@
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed =  { 'lua_ls', 'marksman', }
+    ensure_installed =  { 'lua_ls', 'marksman', },
+    handlers = {
+        -- default handler
+        function (server_name)
+            require("lspconfig")[server_name].setup {}
+        end,
+        ["lua_ls"] = function ()
+            local runtime_path = vim.split(package.path, ';')
+            table.insert(runtime_path, "lua/?.lua")
+            table.insert(runtime_path, "lua/?/init.lua")
+            require('lspconfig').lua_ls.setup({
+                settings = {
+                    Lua = {
+                        telemetry = { enable = false },
+                        runtime = {
+                            version = "LuaJIT",
+                            path = runtime_path,
+                        },
+                        diagnostic = { globals = { "vim" } },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" }
+                        },
+                    }
+                }
+            })
+        end,
+        ["gopls"] = function ()
+            require('lspconfig').gopls.setup({
+                filetypes = { 'go', 'gomod', 'gowork', 'gotmpl', 'templ' },
+            })
+        end,
+    }
 })
 
 local cmp = require('cmp')
@@ -36,50 +68,11 @@ cmp.setup({
 })
 
 local lspconfig = require('lspconfig')
-
 lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
     'force',
     lspconfig.util.default_config.capabilities,
     require("cmp_nvim_lsp").default_capabilities()
 )
-
--- Lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.lua_ls.setup({
-    settings = {
-        Lua = {
-            telemetry = { enable = false },
-            runtime = {
-                version = "LuaJIT",
-                path = runtime_path,
-            },
-            diagnostic = { globals = { "vim" } },
-            workspace = {
-                checkThirdParty = false,
-                library = { vim.env.VIMRUNTIME, "${3rd}/luv/library" }
-            },
-        }
-    }
-})
-
--- Markdown
-lspconfig.marksman.setup({})
-
--- C++
-lspconfig.clangd.setup({})
-lspconfig.neocmake.setup({})
-
--- Golang
-lspconfig.gopls.setup({
-    filetypes = { 'go', 'gomod', 'gowork', 'gotmpl', 'templ' },
-})
-lspconfig.templ.setup({})
-lspconfig.htmx.setup({})
-
--- Rust
-lspconfig.rust_analyzer.setup({})
 
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
