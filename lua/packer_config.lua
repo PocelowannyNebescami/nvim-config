@@ -36,12 +36,14 @@ return require('packer').startup(function(use)
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
-    use { 'williamboman/mason.nvim' }
     use {
-        'neovim/nvim-lspconfig',
+        'williamboman/mason.nvim',
         requires = {
             { 'williamboman/mason-lspconfig.nvim' },
-        } }
+            { 'neovim/nvim-lspconfig' },
+        }
+    }
+
     use {
         'hrsh7th/nvim-cmp',
         requires = {
