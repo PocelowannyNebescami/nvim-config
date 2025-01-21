@@ -25,6 +25,10 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.spelllang = { "en_us", "ru" }
+vim.opt.spellsuggest = { "best", 3 }
+vim.opt.spell = true
+
 vim.g.mapleader = " "
 
 vim.o.splitright = true
