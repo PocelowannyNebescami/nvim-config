@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
