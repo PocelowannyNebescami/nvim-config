@@ -1,7 +1,7 @@
 require('neovim-project').setup({
     projects = {
         "~/Projects/*",
-        "~/projects/*",
+        "~/Documents/*",
         "~/.config/*",
     },
 })
