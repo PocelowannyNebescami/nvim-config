@@ -4,6 +4,14 @@ require('neovim-project').setup({
         "~/Documents/*",
         "~/.config/*",
     },
+    picker = {
+        type = "telescope",
+        preview = {
+            enabled = true,
+            git_status = false,
+            show_hidden = true,
+        },
+    },
 })
 
 vim.keymap.set('n', '<leader>ss', ':Telescope neovim-project history<CR>', {
