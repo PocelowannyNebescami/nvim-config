@@ -58,10 +58,6 @@ return require('packer').startup(function(use)
 
     use 'nvim-lualine/lualine.nvim'
 
-    use { 'mcauley-penney/visual-whitespace.nvim', config = function()
-        return true
-    end }
-
     use { 'kylechui/nvim-surround', tag = "*" }
 
     use 'm4xshen/autoclose.nvim'
