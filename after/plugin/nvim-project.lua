@@ -8,7 +8,8 @@ require('neovim-project').setup({
         type = "telescope",
         preview = {
             enabled = true,
-            git_status = false,
+            git_status = true,
+            git_fetch = false,
             show_hidden = true,
         },
     },
