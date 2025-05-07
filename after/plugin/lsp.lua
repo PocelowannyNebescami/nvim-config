@@ -94,20 +94,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
                 opts("[G]o to [d]eclaration"))
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
-        vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
-                opts("[V]iew [w]orkspace [s]ymbol"))
-        vim.keymap.set("n", "<leader>vc", vim.diagnostic.open_float,
-                opts("[V]iew diagnosti[c] messages"))
+        vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float,
+                opts("[L]SP [d]iagnostic"))
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
-                opts("Go to next [d]iagnostic message"))
+                opts("Next [d]iagnostic message"))
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
-                opts("Go to previous [d]iagnostic message"))
-        vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
-                opts("[V]iew [c]ode [a]ctions"))
-        vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,
-                opts("[V]iew [r]efe[r]ences"))
-        vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename,
-                opts("[R]e[n]ame symbol"))
+                opts("Previous [d]iagnostic message"))
+        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
+                opts("[L]SP code [a]ctions"))
+        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,
+                opts("[L]SP [r]ename symbol"))
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
                 opts("Signature [h]elp"))
 
