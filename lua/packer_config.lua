@@ -64,6 +64,11 @@ return require('packer').startup(function(use)
 
     use 'stevearc/oil.nvim'
 
+    use {
+        "psliwka/vim-dirtytalk",
+        run = ":DirtytalkUpdate",
+    }
+
     if packer_bootstrap then
         require('packer').sync()
     end

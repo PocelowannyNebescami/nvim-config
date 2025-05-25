@@ -27,7 +27,8 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.opt.spelllang = { "en_us", "ru" }
+-- programming from vim-dirtytalk
+vim.opt.spelllang = { "en_us", "ru", "programming" }
 vim.opt.spellsuggest = { "best", 3 }
 vim.opt.spell = true
 
