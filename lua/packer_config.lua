@@ -69,6 +69,8 @@ return require('packer').startup(function(use)
         run = ":DirtytalkUpdate",
     }
 
+    use { "shortcuts/no-neck-pain.nvim", tag = "v2.*" }
+
     if packer_bootstrap then
         require('packer').sync()
     end
