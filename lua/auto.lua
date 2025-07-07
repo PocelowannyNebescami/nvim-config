@@ -31,3 +31,12 @@ autocmd('BufWritePost', {
     pattern = "*.go",
     callback = format_go,
 })
+
+autocmd('BufEnter', {
+    pattern = { '*.ts?', '*.js?' },
+    callback = function()
+        local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
+        vim.fn.setreg('l', "yoconsole.log('" .. esc .. "pa:', " .. esc .. "p")
+    end,
+    desc = 'Add a macros to log a variable in js/ts',
+})
