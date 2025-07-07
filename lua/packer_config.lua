@@ -41,10 +41,11 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
+        branch = 'v1.x',
         requires = {
-            { 'williamboman/mason-lspconfig.nvim' },
-            { 'neovim/nvim-lspconfig' },
+            { 'mason-org/mason-lspconfig.nvim', branch = 'v1.x' },
+            { 'neovim/nvim-lspconfig', tag = 'v1.*' },
         }
     }
 
