@@ -76,6 +76,8 @@ return require('packer').startup(function(use)
 
     use { "shortcuts/no-neck-pain.nvim", tag = "v2.*" }
 
+    use { 'folke/twilight.nvim' }
+
     if packer_bootstrap then
         require('packer').sync()
     end
