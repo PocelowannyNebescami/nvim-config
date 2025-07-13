@@ -1,4 +1,4 @@
-require("auto")
-require("packer_config")
 require("remap")
+require("lua.lazy")
 require("set")
+require("auto")
