@@ -37,6 +37,7 @@ return {
     },
     opts = {
         defaults = {
+            layout_strategy = 'flex',
             mappings = {
                 i = {
                     ["<esc>"] = require('telescope.actions').close
