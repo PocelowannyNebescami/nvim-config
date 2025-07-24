@@ -1,4 +1,4 @@
 require("remap")
-require("plugin-manager")
 require("set")
 require("auto")
+require("plugin-manager")
