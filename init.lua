@@ -1,4 +1,4 @@
 require("remap")
-require("lua.lazy")
+require("plugin-manager")
 require("set")
 require("auto")
