@@ -61,7 +61,5 @@ autocmd("LspAttach", {
             opts("[L]SP code [a]ctions"))
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,
             opts("[L]SP [f]ormat buffer"))
-        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
-            opts("Signature [h]elp"))
     end
 })
