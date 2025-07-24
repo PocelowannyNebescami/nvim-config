@@ -45,27 +45,23 @@ autocmd("LspAttach", {
     desc = "LSP actions",
     callback = function(event)
         local opts = function(description)
-            if description == nil  or description == nil then
+            if description == nil or description == nil then
                 return { buffer = event.buf, remap = false }
             end
             return { buffer = event.buf, remap = false, desc = description }
         end
 
         vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-                opts("[G]o to [d]efinition"))
+            opts("[G]o to [d]efinition"))
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-                opts("[G]o to [d]eclaration"))
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
+            opts("[G]o to [d]eclaration"))
         vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float,
-                opts("[L]SP [d]iagnostic"))
+            opts("[L]SP [d]iagnostic"))
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
-                opts("[L]SP code [a]ctions"))
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,
-                opts("[L]SP [r]ename symbol"))
+            opts("[L]SP code [a]ctions"))
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format,
-                opts("[L]SP [f]ormat buffer"))
+            opts("[L]SP [f]ormat buffer"))
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
-                opts("Signature [h]elp"))
-
+            opts("Signature [h]elp"))
     end
 })
