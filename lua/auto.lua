@@ -58,10 +58,6 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Hover"))
         vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float,
                 opts("[L]SP [d]iagnostic"))
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
-                opts("Next [d]iagnostic message"))
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
-                opts("Previous [d]iagnostic message"))
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
                 opts("[L]SP code [a]ctions"))
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,

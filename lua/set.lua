@@ -27,12 +27,9 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
--- programming from vim-dirtytalk
-vim.opt.spelllang = { "en_us", "ru", "programming" }
+vim.opt.spelllang = { "en_us", "ru" }
 vim.opt.spellsuggest = { "best", 3 }
 vim.opt.spell = true
-
-vim.g.mapleader = " "
 
 vim.o.splitright = true
 
@@ -42,26 +39,5 @@ vim.diagnostic.config({
     }
 })
 
-if vim.fn.has('wsl') == 1 then
-    vim.g.clipboard = {
-        name = 'WslClipboard',
-        copy = {
-            ['+'] = 'clip.exe',
-            ['*'] = 'clip.exe',
-        },
-        paste = {
-            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = 0,
-    }
-end
-
 local border_style = "rounded"
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover, { border = border_style }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help, { border = border_style }
-)
 vim.diagnostic.config{ float = { border = border_style } }
