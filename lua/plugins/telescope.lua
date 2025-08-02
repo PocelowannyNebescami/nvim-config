@@ -23,8 +23,13 @@ return {
         {
             '<leader>ps',
             function()
+                local query = vim.fn.input("Grep > ")
+                if query == nil or query == '' then
+                    return
+                end
+
                 require('telescope.builtin').grep_string({
-                    search = vim.fn.input("Grep > "),
+                    search = query,
                 })
             end,
             desc = "Find files in [p]roject with [s]tring",
