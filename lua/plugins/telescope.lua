@@ -38,7 +38,12 @@ return {
             '<leader>rs',
             require('telescope.builtin').lsp_references,
             desc = "[R]eferences to [s]ymbol"
-        }
+        },
+        {
+            '<F1>',
+            require('telescope.builtin').help_tags,
+            desc = "Search help tags",
+        },
     },
     opts = {
         defaults = {
