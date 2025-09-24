@@ -1,20 +1,24 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     branch = 'master',
+    lazy = false,
     build = ':TSUpdate',
-    opts = {
-        -- A list of parser names, or "all"
-        -- (the five listed parsers should always be installed)
-        ensure_installed = { "json", "lua", "vim" },
+    config = function()
+        require 'nvim-treesitter.configs'.setup {
+            ensure_installed = {
+                "json",
+                "lua",
+                "vim",
+                "gitcommit",
+                "git_rebase",
+                "diff",
+            },
+            ignore_install = { "javascript" },
+            auto_install = true,
 
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        auto_install = true,
-
-        highlight = {
-            enable = true,
-        },
-    },
+            highlight = {
+                enable = true,
+            },
+        }
+    end,
 }
